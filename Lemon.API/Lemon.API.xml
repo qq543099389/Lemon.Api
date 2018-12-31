@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lemon.API</name>
+    </assembly>
+    <members>
+        <member name="M:Lemon.API.Controllers.BlogController.GetBlogModel">
+            <summary>
+            获取所有博客及评论
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Lemon.API.Controllers.BlogController.EditBlog(Lemon.API.Models.BlogModel)">
+            <summary>
+            编辑博客
+            </summary>
+            <param name="blogModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Lemon.API.Controllers.BlogController.AddBlog(Lemon.API.Models.BlogModel)">
+            <summary>
+            添加博客
+            </summary>
+            <param name="blogModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Lemon.API.Controllers.BlogController.DeleteBlogModel(System.Int32)">
+            <summary>
+            删除博客
+            </summary>
+            <param name="id">博客ID</param>
+            <returns></returns>
+        </member>
+        <member name="F:Lemon.API.Models.RoleModel.RoleType.Administrator">
+            <summary>
+            管理员
+            </summary>
+        </member>
+        <member name="F:Lemon.API.Models.RoleModel.RoleType.User">
+            <summary>
+            普通用户
+            </summary>
+        </member>
+    </members>
+</doc>
