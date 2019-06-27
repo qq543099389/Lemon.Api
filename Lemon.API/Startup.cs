@@ -20,6 +20,7 @@ using Lemon.API.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using AutoMapper;
 
 namespace Lemon.API
 {
@@ -57,9 +58,10 @@ namespace Lemon.API
                 t.DocumentFilter<AuthApplyTagDescriptions>();
             });
             services.AddDbContext<CoreDbContext>(options =>
-                options.UseMySQL(Configuration.GetConnectionString("lemon"))
+                options.UseMySQL(Configuration.GetConnectionString("Lemon"))
             );
 
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
+using AutoMapper;
 
 namespace Lemon.API.Controllers
 {
@@ -16,9 +17,11 @@ namespace Lemon.API.Controllers
     public class AuthenticateController : ControllerBase
     {
         private readonly CoreDbContext _context;
-        public AuthenticateController(CoreDbContext context)
+        private readonly IMapper _mapper;
+        public AuthenticateController(CoreDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpPost("/login")]
@@ -27,7 +30,7 @@ namespace Lemon.API.Controllers
             string message;
             string invalidPasswordKey = string.Format("lemon_{0}", loginModel.Password);
             loginModel.Password = EncryptHelper.MD5 (invalidPasswordKey);
-            var userModel = _context.userModels.Where(t => t.UserName == loginModel.UserName && t.Password == loginModel.Password).First();
+            var userModel = _context.userModels.Where(t => t.UserName == loginModel.UserName && t.Password == loginModel.Password).FirstOrDefault();
             if(userModel == null)
             {
                 message = "用户名或密码错误";
@@ -36,7 +39,7 @@ namespace Lemon.API.Controllers
 
             userModel.LastLoginTime = DateTime.Now;
             var claims = new List<Claim>{
-                new Claim(ClaimTypes.Name,userModel.UserName),
+                new Claim(ClaimTypes.Name,userModel.Name),
                 new Claim(ClaimTypes.Role,userModel.RoleId.ToString()),
                 new Claim(ClaimTypes.Sid,userModel.ID.ToString())
             };
@@ -46,7 +49,10 @@ namespace Lemon.API.Controllers
             {
                 ExpiresUtc = DateTime.UtcNow.AddDays(3)
             });
-            return Ok();
+
+            var LoginReq = _mapper.Map<LoginRetModel>(userModel);
+
+            return Ok(LoginReq);
         }
     }
 }

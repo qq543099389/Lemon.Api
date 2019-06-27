@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lemon.API", "Lemon.API\Lemon.API.csproj", "{5E808114-3585-4957-9046-608254F5C3AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lemon.API", "Lemon.API\Lemon.API.csproj", "{5E808114-3585-4957-9046-608254F5C3AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

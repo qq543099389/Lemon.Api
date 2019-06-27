@@ -31,6 +31,101 @@
             <param name="id">博客ID</param>
             <returns></returns>
         </member>
+        <member name="P:Lemon.API.Models.BlogModel.ID">
+            <summary>
+            博客
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.BlogModel.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.BlogModel.Createtime">
+            <summary>
+            发表时间
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.BlogModel.UserID">
+            <summary>
+            发布者ID
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.BlogModel.BlogImgUri">
+            <summary>
+            博客图片（暂未使用）
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.BlogModel.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="T:Lemon.API.Models.GetBlogModel">
+            <summary>
+            获取博客接口返回的实体
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.GetBlogModel.ReplyList">
+            <summary>
+            评论列表
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.GetBlogModel.Name">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.GetBlogModel.ImgUrl">
+            <summary>
+            头像地址
+            </summary>
+        </member>
+        <member name="T:Lemon.API.Models.ReplyAndUser">
+            <summary>
+            评论和用户信息实体
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.ReplyAndUser.Name">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.ReplyAndUser.ImgUrl">
+            <summary>
+            头像地址
+            </summary>
+        </member>
+        <member name="T:Lemon.API.Models.ReplyModel">
+            <summary>
+            评论
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.ReplyModel.ID">
+            <summary>
+            评论ID
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.ReplyModel.Content">
+            <summary>
+            评论内容
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.ReplyModel.Createtime">
+            <summary>
+            评论时间
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.ReplyModel.UserID">
+            <summary>
+            评论用户ID
+            </summary>
+        </member>
+        <member name="P:Lemon.API.Models.ReplyModel.BlogID">
+            <summary>
+            所属博客ID
+            </summary>
+        </member>
         <member name="F:Lemon.API.Models.RoleModel.RoleType.Administrator">
             <summary>
             管理员

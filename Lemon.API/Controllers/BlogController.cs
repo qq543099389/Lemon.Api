@@ -9,6 +9,7 @@ using Lemon.API.Data;
 using Lemon.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using AutoMapper;
 
 namespace Lemon.API.Controllers
 {
@@ -16,10 +17,12 @@ namespace Lemon.API.Controllers
     public class BlogController : ControllerBase
     {
         private readonly CoreDbContext _context;
+        private readonly IMapper _mapper;
 
-        public BlogController(CoreDbContext context)
+        public BlogController(CoreDbContext context ,IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -31,18 +34,29 @@ namespace Lemon.API.Controllers
         {
             var BlogList = _context.BlogModel.ToList();
             var RepliesList = _context.ReplyModel.ToList();
-            var ResultList = AutoMapper.Mapper.Map<List<GetBlogModel>>(BlogList);
+            var ResultList = new List<GetBlogModel>();
             var UserList = _context.userModels.ToList();
-            foreach(var blog in ResultList)
+
+            //博客列表映射
+            foreach (var blog in BlogList)
             {
-                //获取博客评论列表
-                foreach (var replyId in blog.ReplyID)
+                ResultList.Add(_mapper.Map<GetBlogModel>(blog));
+            }
+            //评论列表
+            foreach (var blog in ResultList)
+            {
+                blog.ReplyList = new List<ReplyAndUser>();
+                var ReplyList = RepliesList.Where(t => t.BlogID == blog.ID).ToList();
+                foreach (var reply in ReplyList)
                 {
-                    blog.ReplyList.Add(RepliesList.SingleOrDefault(t => t.ID==replyId));
+                    var replyAndUser = _mapper.Map<ReplyAndUser>(reply);
+                    replyAndUser.Name = UserList.Find(t => t.ID == reply.UserID).Name;
+                    replyAndUser.ImgUrl = UserList.Find(t => t.ID == reply.UserID).UserHeadImageUri;
+                    blog.ReplyList.Add(replyAndUser);
                 }
-                //获取用户名和头像uri
-                blog.UserName = UserList.Find(t => t.ID == blog.UserID).Name;
-                blog.UserHeadImageUri = UserList.FirstOrDefault(t => t.ID == blog.UserID).UserHeadImageUri;
+
+                blog.Name = UserList.Find(t => t.ID == blog.UserID).Name;
+                blog.ImgUrl = UserList.Find(t => t.ID == blog.UserID).UserHeadImageUri;
             }
             return ResultList;
         }
