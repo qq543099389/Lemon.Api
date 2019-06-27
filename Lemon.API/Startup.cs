@@ -77,7 +77,7 @@ namespace Lemon.API
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
 
             app.UseSwagger();
